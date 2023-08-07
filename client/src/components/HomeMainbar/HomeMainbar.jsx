@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, useLocation,useNavigate} from "react-router-dom"
+import { useLocation,useNavigate} from "react-router-dom"
 import {useSelector} from 'react-redux'
 import "./HomeMainbar.css"
 import QuestionList from './QuestionList'
@@ -86,7 +86,7 @@ const HomeMainbar = () => {
           questionsList.data===null ?
           <h1>Loading...</h1>:
           <>
-          <p>{questionsList.data.length} questions</p>
+          <p>{questionsList.data.length} Questions</p>
           <QuestionList questionsList={questionsList.data}/>
           </>
         }

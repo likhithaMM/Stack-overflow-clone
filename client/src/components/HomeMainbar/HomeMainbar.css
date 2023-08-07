@@ -41,6 +41,11 @@
   .display-question-container .display-votes-ans {
     padding: 10px;
   }
+  @media (max-width:400px) {
+    .display-question-container .display-votes-ans{
+        padding:10px;
+    }
+}
   
   .display-question-container .display-votes-ans p {
     margin: 0%;

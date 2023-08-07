@@ -1,15 +1,59 @@
-import  express  from "express";
-
-import {login,signup} from '../controllers/auth.js'
-import {getAllUsers,updateProfile} from '../controllers/users.js'
+import express from 'express'
+import {
+    login,
+    signup,
+    signout,
+    requireSignin,
+    hasAuthorization} from '../controllers/auth.js'
+import {
+    getAllUsers,
+    updateProfile,
+    create,
+    userByID,
+    read,
+    list,
+    remove,
+    update,
+    photo,
+    defaultPhoto,
+    addFollowing,
+    addFollower,
+    removeFollowing,
+    removeFollower,
+    findPeople} from '../controllers/users.js'
 import auth from '../middlewares/auth.js'
 
-const router =express.Router();
+const router = express.Router()
 
-router.post('/signup',signup)  //here we will be writing functions but those very huge so we are writing those func in controllers
-router.post('/login',login)
+router.param('userId',auth, userByID)
 
-router.get('/getAllUsers',getAllUsers) //importing users controller
-router.patch("/update/:id", auth, updateProfile);
+router.post('/signup', signup)
+router.post('/login', login)
+router.get('/signout',signout)
+router.get('/getAllUsers', getAllUsers)
+router.patch('/update/:id', auth, updateProfile)
+
+router.route('/create')
+  .get(list)
+  .post(create)
+
+router.route('/photo/:userId')
+  .get(photo, defaultPhoto)
+router.route('/defaultphoto')
+  .get(defaultPhoto)
+
+router.route('/follow')
+    .put(requireSignin, addFollowing, addFollower)
+router.route('/unfollow')
+    .put(requireSignin, removeFollowing, removeFollower)
+
+router.route('/findpeople/:userId')
+   .get(requireSignin, auth,findPeople)
+
+router.route('/:userId')
+  .get(requireSignin, read)
+  .put(requireSignin, hasAuthorization, update)
+  .delete(requireSignin, hasAuthorization, remove)
+
 
 export default router

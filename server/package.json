@@ -3,19 +3,36 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "start":"nodemon index.js"
+    "start": "nodemon index.js"
   },
   "author": "Medisetty Likhitha",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "child_process": "^1.0.2",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-jwt": "^6.1.0",
+    "formidable": "^3.5.0",
+    "fs": "^0.0.1-security",
+    "helmet": "^7.0.0",
+    "install-package": "^2.0.0",
     "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
     "mongoose": "^7.1.1",
-    "nodemon": "^2.0.22"
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.4",
+    "nodemon": "^2.0.22",
+    "prop-types": "^15.8.1",
+    "react-helmet": "^6.1.0",
+    "react-lodash": "^0.1.2",
+    "stripe": "^12.17.0"
   }
 }

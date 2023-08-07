@@ -50,7 +50,8 @@ const Navbar = () => {
                 py="7px"
                 borderRadius="50%"
                 color="white"
-              > <Link to={`/Users/${User?.result?._id}` }className='Mlink'>{User.result.name.charAt(0).toUpperCase()}</Link></Avatar>                                    
+              > 
+            <Link to={`/Users/${User?.result?._id}` }className='Mlink'>{User.result.name.charAt(0).toUpperCase()}</Link></Avatar>                                    
              <button className='nav-item nav-links' onClick={handleLogOut}>Log out</button>
          </>
        }

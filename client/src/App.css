@@ -13,4 +13,14 @@
     padding: 24px;
     box-sizing: border-box;
   }
-  
+html, body {
+    overflow-x: hidden;
+  }
+body {
+  position: relative
+}
+@media (min-width:400px) {
+  html, body {
+    overflow-x:auto;
+  }
+}

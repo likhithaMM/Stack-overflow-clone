@@ -2,6 +2,7 @@ import React from 'react'
 import LeftSidebar from "../../components/LefSidebar/LeftSidebar"
 import RightSidebar from "../../components/RightSidebar/RightSidebar"
 import HomeMainbar from "../../components/HomeMainbar/HomeMainbar"
+import '../../App.css'
 const Home = () => {
   return (
     <div className='home-container-1'>

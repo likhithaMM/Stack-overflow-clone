@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from "react-router-dom"
-import Globe from "../../assets/Globe.png"
+import Globe from "../../assets/Globe.svg"
 import "./LeftSidebar.css"
 const LeftSidebar = () => {
   return (
@@ -21,6 +21,12 @@ const LeftSidebar = () => {
                 <NavLink to="/Users" className="side-nav-links" activeClassName="active">
                     <p>Users</p>
                 </NavLink>
+                <NavLink to='/SocialMedia' className='side-nav-links' activeClassName='active' style={{paddingLeft:'5px'}}>
+                <p>Social Media</p>
+                </NavLink>         
+                <NavLink to='/Plans' className='side-nav-links' activeClassName='active' style={{paddingLeft:'5px'}}>
+                <p>Plans</p>
+                </NavLink>     
             </div>
         </nav>
     </div>
