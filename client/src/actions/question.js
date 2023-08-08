@@ -24,7 +24,7 @@ export const fetchAllQuestions = ()=> async(dispatch)=>{
 export const deleteQuestion=(id,navigate)=>async(dispatch)=>{
   try{
     const {data}=api.deleteQuestion(id)
-    ///////////////
+    dispatch(fetchAllQuestions())
     navigate('/')
   }
   catch(error){
