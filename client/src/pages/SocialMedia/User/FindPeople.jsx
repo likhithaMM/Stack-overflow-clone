@@ -273,6 +273,7 @@ export default function FindPeople() {
         const response = await findPeople({
           userId: jwt.user._id,
         });
+        console.log(response); 
         if (response && response.data) {
           setValues({ ...values, users: response.data });
         } else {

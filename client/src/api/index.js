@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API =axios.create({baseURL:'https://stackoverflow-backend-007k.onrender.com'})
+const API =axios.create({baseURL:'http://localhost:5000/'})
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem("Profile")) {
@@ -34,6 +34,8 @@ export const unfollowUser = (userId, unfollowId) => API.put('/users/unfollow', {
 export const getUserById = (id) => API.get(`/users/${id}`);
 export const deleteUser = (id) => API.delete(`/users/${id}`);
 
+export const createPost = (userId, token) => API.post(`/posts/new/${userId}`, {}, { headers: { Authorization: `Bearer ${token}` } });
+
 export const create = (postData) => API.post('/posts/new', postData);
 export const findPeople = (userId) => API.get(`/posts/by/${userId}`);
 export const listNewsFeed = (userId) => API.get(`/posts/feed/${userId}`);
@@ -42,3 +44,14 @@ export const like = (userId, postId) => API.put('/posts/like', { userId, postId 
 export const unlike = (userId, postId) => API.put('/posts/unlike', { userId, postId });
 export const comment = (userId, postId, comment) => API.put('/posts/comment', { userId, postId, comment });
 export const uncomment = (userId, postId, comment) => API.put('/posts/uncomment', { userId, postId, comment });
+
+export const createUser = (user) => API.post('/users/create', user);
+export const getUsersList = (signal) => API.get('/users/create', { signal });
+
+
+// Define read user profile function
+export const readUserProfile = (userId) => API.get(`/users/${userId}`);
+
+// Define update user profile function
+export const updateUserProfile = (userId, updateData) =>
+  API.put(`/users/${userId}`, updateData);

@@ -1,47 +1,54 @@
-import React, {useState} from 'react'
-import PropTypes from 'prop-types'
-import IconButton from '@mui/material/IconButton'
-import Button from '@mui/material/Button'
-import DeleteIcon from '@mui/icons-material//Delete'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import auth from './../../../api/auth-helper'
-import {remove} from './../../../api/api-user.js'
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from 'react-router-dom';
+import { deleteUser } from '../../../api/index';
+import auth from './../../../api/auth-helper';
 
 export default function DeleteUser(props) {
-  const [open, setOpen] = useState(false)
-  const [redirect, setRedirect] = useState(false)
-  const navigate = useNavigate()
-  const jwt = auth.isAuthenticated()
+  const [open, setOpen] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate();
+  const jwt = auth.isAuthenticated();
+
   const clickButton = () => {
-    setOpen(true)
-  }
-  const deleteAccount = () => { 
-    remove({
-      userId: props.userId
-    }, {t: jwt.token}).then((data) => {
-      if (data && data.error) {
-        console.log(data.error)
-      } else {
-        auth.clearJWT(() => console.log('deleted'))
-        setRedirect(true)
-      }
-    })
-  }
+    setOpen(true);
+  };
+
+  const deleteAccount = () => {
+    deleteUser(props.userId)
+      .then((data) => {
+        if (data && data.error) {
+          console.log(data.error);
+        } else {
+          auth.clearJWT(() => console.log('deleted'));
+          setRedirect(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleRequestClose = () => {
-    setOpen(false)
+    setOpen(false);
+  };
+
+  if (redirect) {
+    return navigate('/');
   }
 
-    if (redirect) {
-      return navigate('/')
-    }
-    return (<span>
+  return (
+    <span>
       <IconButton aria-label="Delete" onClick={clickButton} color="secondary">
-        <DeleteIcon/>
+        <DeleteIcon />
       </IconButton>
 
       <Dialog open={open} onClose={handleRequestClose}>
@@ -55,13 +62,19 @@ export default function DeleteUser(props) {
           <Button onClick={handleRequestClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={deleteAccount} color="secondary" autoFocus="autoFocus">
+          <Button
+            onClick={deleteAccount}
+            color="secondary"
+            autoFocus="autoFocus"
+          >
             Confirm
           </Button>
         </DialogActions>
       </Dialog>
-    </span>)
+    </span>
+  );
 }
+
 DeleteUser.propTypes = {
-  userId: PropTypes.string.isRequired
-}
+  userId: PropTypes.string.isRequired,
+};

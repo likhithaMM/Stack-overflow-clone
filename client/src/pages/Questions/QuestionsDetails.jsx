@@ -81,7 +81,7 @@ const QuestionsDetails = () => {
   const dispatch=useDispatch()
   const User=useSelector((state)=>(state.currentUserReducer))
   const location=useLocation()
-  const url='https://stackoverflow-backend-007k.onrender.com'
+  const url='http://localhost:3000/'
   const handlePosAns =(e,answerLength)=>{
       e.preventDefault();
       if(User ===null){
