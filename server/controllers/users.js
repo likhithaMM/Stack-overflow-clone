@@ -13,7 +13,7 @@ export const getAllUsers = async (req, res) => {
         allUsers.forEach(users => {
             allUserDetails.push({...users._doc})
         });
-        console.log(allUserDetails)
+        // console.log("yessssssssssss",allUserDetails)
         res.status(200).send(allUserDetails)
     } catch (error) {
         console.log('controllers, users getAllUsers',error);

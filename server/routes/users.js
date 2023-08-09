@@ -31,7 +31,8 @@ router.post('/signup', signup)
 router.post('/login', login)
 router.get('/signout',signout)
 router.get('/getAllUsers', getAllUsers)
-router.patch('/update/:id', auth, updateProfile)
+router.patch('/update/:id', auth, updateProfile)       //update
+// router.get('/:userId',auth,userByID)
 
 router.route('/create')
   .get(list)
@@ -52,7 +53,7 @@ router.route('/findpeople/:userId')
 
 router.route('/:userId')
   .get(requireSignin, read)
-  .put(requireSignin, hasAuthorization, update)
+  .put(requireSignin, hasAuthorization, update)      //update
   .delete(requireSignin, hasAuthorization, remove)
 
 

@@ -31,7 +31,7 @@ export default function CheckoutForm() {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
-          localStorage.removeItem('Profile')
+          //localStorage.removeItem('Profile')
           break;
         case "processing":
           setMessage("Your payment is processing.");

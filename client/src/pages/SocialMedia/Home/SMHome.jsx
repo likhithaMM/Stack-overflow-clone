@@ -8,8 +8,8 @@ import FindPeople from "../User/FindPeople";
 
 const SMHome = () => {
   const profile = localStorage.getItem("Profile");
-  console.log("MAINN");
-  console.log(profile);
+  // console.log("MAINN");
+  // console.log(profile);
   const navigate = useNavigate();
   useEffect(() => {
     if (!profile) {

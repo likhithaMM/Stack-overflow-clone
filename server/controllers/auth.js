@@ -15,7 +15,7 @@ export const signup=async(req,res)=>{
         return res.status(404).json({message:"User already exists"})
       }
       //const hashedPassword= await bcrypt.hash(password,12)
-      const newUser = new users({name:name,email:email,password:password})
+      const newUser = new users({name:name,email:email,password:password,noOfQuestions: 0 })   // Set the initial value here
       await newUser.save()
       //const token = jwt.sign({email:newUser.email,id:newUser._id},process.env.JWT_SECRET,{expiresIn:"1h"});
       //res.status(200).json({result:newUser,token})

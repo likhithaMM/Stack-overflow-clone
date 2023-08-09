@@ -1,31 +1,32 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import bodyParser from "body-parser";
 import dotenv from 'dotenv'
+import cron from 'node-cron'
+import helmet from 'helmet'
 
 import questionRoutes from './routes/Questions.js'
 import answerRoutes from './routes/Answers.js'
 import verification from './routes/verification.js'
 import searchStackOverflow from './routes/searchStackOverflow.js'
-import paymentRoutes from './routes/payment.js'
-import cron from 'node-cron'
-import helmet from 'helmet'
-import updatePlans from './utilities/updatePlans.js'
-import plans from './routes/Plans.js'
+
 import postRoutes from './routes/post.routes.js'
 import userRoutes from './routes/users.js'   //users.js is necesary in node
 
-//const dummyPosts = require('./server/MongoDB Collections/posts'); // Import the dummy data
+import paymentRoutes from './routes/payment.js'
+import updatePlans from './utilities/updatePlans.js'
+import plans from './routes/Plans.js'
 
 const app=express(); //Here app is the server
 dotenv.config();
 app.use(express.json({limit:"30mb",extended:true}))
+app.use(bodyParser.json());
 app.use(express.urlencoded({limit:"30mb",extended:true}))   //these all are the middlewares
 app.use(cors());  //to eliminate the errors during the communication b/w 2 servers
 app.use(helmet({
     crossOriginResourcePolicy: false,
   }));
-
 
 mongoose.set('strictQuery', true)
 app.get('/',(req,res)=>{                           
@@ -39,6 +40,7 @@ app.use('/questions',questionRoutes)
 app.use('/answer',answerRoutes)
 app.use('/verify',verification)
 app.use('/search',searchStackOverflow)
+
 app.use('/payment', paymentRoutes);
 app.use('/plans', plans)
 app.use('/posts',postRoutes)

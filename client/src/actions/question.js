@@ -1,8 +1,9 @@
 // import React from 'react'
-import * as api from '../api'
+import * as api from '../api/index.js'
 export const askQuestion = (questionData,navigate) => async(dispatch)=> {
  try{
    const {data}=await api.postQuestion(questionData)
+   console.log(data)
    dispatch({type:"POST_QUESTION",payload:data})
    dispatch(fetchAllQuestions())
    navigate('/')

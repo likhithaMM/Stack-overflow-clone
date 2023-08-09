@@ -1,17 +1,20 @@
 import Questions from '../models/Questions.js'
 import mongoose from 'mongoose'
-export const AskQuestion= async (req,res) => {
-      const postQuestionData=req.body;
-      const postQuestion = new Questions(postQuestionData);
-      try{
-        await postQuestion.save();
-        res.status(200).json("Posted a question sucessfully")
-      }
-      catch(error){
-        console.log(error)
-        res.status(409).json("Couldn't post a new question")
-      }
-}
+import User from '../models/auth.js';
+import { contentSecurityPolicy } from 'helmet';
+
+// export const AskQuestion= async (req,res) => {
+//       const postQuestionData=req.body;
+//       const postQuestion = new Questions(postQuestionData);
+//       try{
+//         await postQuestion.save();
+//         res.status(200).json("Posted a question sucessfully")
+//       }
+//       catch(error){
+//         console.log(error)
+//         res.status(409).json("Couldn't post a new question")
+//       }
+// }
 
 export const getAllQuestions = async(req,res)=>{
   try{
@@ -80,36 +83,40 @@ export const voteQuestion=async(req,res)=>{
 
 // import Questions from '../models/Questions.js';
 // import mongoose from 'mongoose';
-// import User from '../models/auth.js';
 
-// export const AskQuestion = async (req, res) => {
-//   const postQuestionData = req.body;
 
-//   try {
-//     const user = await User.findById(postQuestionData.userId);
-//     const planOpted = user.planOpted;
-//     const noOfQuestions = user.noOfQuestions;
+export const AskQuestion = async (req, res) => {
+  const postQuestionData = req.body;
+  console.log(postQuestionData)
 
-//     let questionLimit = 0;
-//     if (planOpted === 'Free') {
-//       questionLimit = 1;
-//     } else if (planOpted === 'Silver') {
-//       questionLimit = 5;
-//     }
+  try {
+    const user = await User.findById(postQuestionData.userId);
+    console.log("User:",user)
+    const planOpted = user.planOpted;
+    console.log("SP:",planOpted)
+    const noOfQuestions = user.noOfQuestions;
+    console.log(noOfQuestions)
 
-//     if (noOfQuestions < questionLimit) {
-//       const postQuestion = new Questions(postQuestionData);
-//       await postQuestion.save();
-//       await User.findByIdAndUpdate(postQuestionData.userId, { $inc: { noOfQuestions: 1 } });
-//       res.status(200).json("Posted a question successfully");
-//     } else {
-//       res.status(409).json("Per day question limit reached");
-//     }
-//   } catch (error) {
-//     console.log('Error posting question:', error);
-//     res.status(409).json("Couldn't post a question");
-//   }
-// }
+    let questionLimit = 1;
+    if (planOpted === 'Free') {
+      questionLimit = 1;
+    } else if (planOpted === 'Silver') {
+      questionLimit = 5;
+    }
+
+    if (noOfQuestions <= questionLimit) {
+      const postQuestion = new Questions(postQuestionData);
+      await postQuestion.save();
+      await User.findByIdAndUpdate(postQuestionData.userId, { $inc: { noOfQuestions: 1 } });
+      res.status(200).json("Posted a question successfully");
+    } else {
+      res.status(409).json("Per day question limit reached");
+    }
+  } catch (error) {
+    console.log('Error posting question:', error);
+    res.status(409).json("Couldn't post a question");
+  }
+}
 
 
 // export const getAllQuestions = async (req, res) => {

@@ -10,10 +10,12 @@ const storeItems = {
 }
 
 router.post("/purchasePlan", async (req, res) => {
+	console.log("Received data:", req.body);
 	try {
 		const stripe = new Stripe(process.env.STRIPE_PVT_KEY)
 		const plan = req.body.plan
-		const id = req.body._id
+		console.log(plan)
+		const id = req.body.id
 		let flag = 0
 		if (plan === 'Silver') {
 			flag = 1

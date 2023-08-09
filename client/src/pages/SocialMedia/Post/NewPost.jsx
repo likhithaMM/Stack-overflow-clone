@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 import auth from "../../../api/auth-helper";
-import { create } from "../../../api/index";
+import {createPost } from "../../../api/index";
 
 const NewPost = (props) => {
   const [values, setValues] = useState({
@@ -29,7 +29,7 @@ const NewPost = (props) => {
     let postData = new FormData();
     postData.append("text", values.text);
     postData.append("photo", values.photo);
-    create(
+    createPost(
       {
         userId: jwt.user._id,
       },

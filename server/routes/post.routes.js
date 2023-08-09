@@ -5,14 +5,14 @@ import postCtrl from '../controllers/post.js'
 
 const router = express.Router()
 
-router.route('/new/:userId')
+router.route('/new/:id')
   .post(requireSignin, postCtrl.create)
 
 router.route('/photo/:postId')
   .get(postCtrl.photo)
 
 router.route('/by/:userId')
-  .get(requireSignin, postCtrl.listByUser)
+  .get(requireSignin, postCtrl.listByUser)      //findPeople
 
 router.route('/feed/:userId')
   .get(requireSignin, postCtrl.listNewsFeed)
