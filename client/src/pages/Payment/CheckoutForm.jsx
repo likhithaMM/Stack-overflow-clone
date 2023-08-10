@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
+  useNavigate,
+} from "react-router-dom";
+import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
@@ -9,7 +12,7 @@ import {
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate=useNavigate();
   const [,setEmail] = useState('');
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +65,7 @@ export default function CheckoutForm() {
       confirmParams: {
         // Make sure to change this to your payment completion page
         // return_url: "http://localhost:3000/Success",
-         return_url: "/Success"
+        return_url: navigate("/Success"),
       },
     });
 
