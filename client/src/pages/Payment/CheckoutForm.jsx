@@ -61,8 +61,8 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://stack-overflow-clone-likki.netlify.app/Success",
-        // return_url: process.env.REACT_APP_FRONT_END,
+        // return_url: "http://localhost:3000/Success",
+         return_url: "/Success"
       },
     });
 
