@@ -9,7 +9,7 @@ export const addPlan = async (id, plan) => {
         } else if(plan === 'Gold') {
             noOfQuestions = Infinity
         }
-        await User.findByIdAndUpdate(id, { planOpted: plan, planOptedOn: Date.now(),noOfQuestions: noOfQuestions }) //noOfQuestions: noOfQuestions i took off
+        await User.findByIdAndUpdate(id, { planOpted: plan, planOptedOn: Date.now() }) //noOfQuestions: noOfQuestions i took off
         return 
         
     } catch (error) {

@@ -107,7 +107,7 @@ export const AskQuestion = async (req, res) => {
     if (noOfQuestions <= questionLimit) {
       const postQuestion = new Questions(postQuestionData);
       await postQuestion.save();
-      await User.findByIdAndUpdate(postQuestionData.userId, { $inc: { noOfQuestions: -1 } });
+      await User.findByIdAndUpdate(postQuestionData.userId, { $inc: { noOfQuestions: 1 } });
       res.status(200).json("Posted a question successfully");
     } else {
       res.status(409).json("Per day question limit reached");
