@@ -8,11 +8,11 @@ import decode from "jwt-decode";
 import './Navbar.css'
 import { setCurrentUser } from '../../actions/currentUser';
 
-const Navbar = () => {
+const Navbar = ({ handleSlideIn }) => {
   // var User = null  ->User is not there
   const dispatch=useDispatch()
-  const navigate=useNavigate
-  var User = useSelector((state)=>(state.currentUserReducer))
+  var User = useSelector((state)=>(state.currentUserReducer));
+  const navigate=useNavigate();
   const handleLogOut=()=>{
     dispatch({type:"LOGOUT"});
     navigate('/')
