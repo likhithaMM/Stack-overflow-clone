@@ -1,8 +1,14 @@
+import axios from 'axios'; // Import axios if not already importe
 import React,{useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import "./AskQuestion.css"
 import {askQuestion} from '../../actions/question'
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const AskQuestion = () => {
     const [questionTitle,setQuestionTitle]=useState('')
     const [questionBody,setQuestionBody]=useState('')
@@ -12,11 +18,37 @@ const AskQuestion = () => {
     var User = useSelector((state)=>(state.currentUserReducer))
     const navigate =useNavigate()
 
-    const handleSubmit=(e)=>{
-        e.preventDefault()
-        console.log({questionTitle,questionBody,questionTags})
-        dispatch(askQuestion({questionTitle,questionBody,questionTags,userPosted:User.result.name,userId:User?.result._id},navigate))
-    }
+    // const handleSubmit=(e)=>{
+    //     e.preventDefault()
+    //     console.log({questionTitle,questionBody,questionTags})
+    //     dispatch(askQuestion({questionTitle,questionBody,questionTags,userPosted:User.result.name,userId:User?.result._id},navigate))
+    // }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log({ questionTitle, questionBody, questionTags });
+      
+        const response = await dispatch(askQuestion({
+          questionTitle,
+          questionBody,
+          questionTags,
+          userPosted: User.result.name,
+          userId: User?.result._id,
+        }, navigate));
+      
+        // if (response.status === 200) {
+        //   alert("Question posted successfully!");
+        // } else if (response.status === 409) {
+        //   alert("Per day question limit reached");
+        // }
+        // else{
+        //     alert("Per day question limit reached");
+        // }
+
+        if(response.status===409){
+            alert("Per day limit exceeded!")
+        }
+      }
+      
 
     const handleEnter=(e)=>{
         if(e.key ==='Enter'){

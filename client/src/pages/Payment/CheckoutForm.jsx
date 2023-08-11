@@ -34,13 +34,16 @@ export default function CheckoutForm() {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+          //alert("Payment successfull!!!");
           //localStorage.removeItem('Profile')
           break;
         case "processing":
           setMessage("Your payment is processing.");
+          //alert("Payment loading!!!")
           break;
         case "requires_payment_method":
           setMessage("Your payment was not successful, please try again.");
+          //alert('Your payment was not successful, please try again.')
           break;
         default:
           setMessage("Something went wrong.");

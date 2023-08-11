@@ -16,7 +16,7 @@ const StripeForm = (props) => {
       //console.log("URL:",process.env.REACT_APP_NODE_JS + "payment/purchasePlan");
       //console.log("Request Body:", JSON.stringify({ plan: window.location.href.split('?')[1], id: user.result._id }));
       
-      fetch("https://stackoverflow-backend-007k.onrender.com/payment/purchasePlan", {
+      fetch("http://localhost:5000/payment/purchasePlan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan: window.location.href.split('?')[1], id: user.result._id }),

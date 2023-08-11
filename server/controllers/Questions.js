@@ -1,7 +1,9 @@
 import Questions from '../models/Questions.js'
 import mongoose from 'mongoose'
 import User from '../models/auth.js';
-import { contentSecurityPolicy } from 'helmet';
+
+// import 'react-toastify/dist/ReactToastify.css';
+
 
 // export const AskQuestion= async (req,res) => {
 //       const postQuestionData=req.body;
@@ -102,17 +104,23 @@ export const AskQuestion = async (req, res) => {
       questionLimit = 1;
     } else if (planOpted === 'Silver') {
       questionLimit = 5;
+    }else{
+      questionLimit=1000;
     }
 
     if (noOfQuestions <= questionLimit) {
       const postQuestion = new Questions(postQuestionData);
       await postQuestion.save();
       await User.findByIdAndUpdate(postQuestionData.userId, { $inc: { noOfQuestions: 1 } });
+      //alert("Question posted successfully!!")
       res.status(200).json("Posted a question successfully");
     } else {
+      //alert("Per day question limit reached")
       res.status(409).json("Per day question limit reached");
     }
   } catch (error) {
+    //alert("Error posting question")
+  
     console.log('Error posting question:', error);
     res.status(409).json("Couldn't post a question");
   }

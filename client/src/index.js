@@ -6,12 +6,16 @@ import { Provider } from 'react-redux';
 import {createStore,applyMiddleware,compose} from 'redux'
 import thunk from 'redux-thunk'
 import Reducers from './reducers'  //no need to give index.js bcz by default the root file in anyfolder is index.js
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const store=createStore(Reducers,compose(applyMiddleware(thunk)))
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
   <React.StrictMode>
     <App />
+    <ToastContainer />
   </React.StrictMode>
   </Provider>
 );

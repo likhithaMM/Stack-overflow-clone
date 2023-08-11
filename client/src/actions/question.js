@@ -7,9 +7,11 @@ export const askQuestion = (questionData,navigate) => async(dispatch)=> {
    dispatch({type:"POST_QUESTION",payload:data})
    dispatch(fetchAllQuestions())
    navigate('/')
+   return data;
  }
  catch(error){
-    console.log(error)
+    // console.log(error)
+    return { success: false, message: "Couldn't post a question" };
  }
 }
 export const fetchAllQuestions = ()=> async(dispatch)=>{
