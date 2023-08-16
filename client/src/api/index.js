@@ -14,6 +14,9 @@ API.interceptors.request.use((req) => {
 export const logIn =(authData)=>API.post('/users/login',authData)
 export const signUp =(authData)=>API.post('/users/signup',authData)
 
+// export const getCurrentPlan = (userId,id) => API.post(`/plans/getCurrentPlan/${id}`, { id: userId });
+// export const getCurrentPlan = (id,userId) => API.post(`/plans/getCurrentPlan/${id}`,{id:userId});
+
 export const postQuestion=(questionData)=>API.post('/questions/Ask',questionData) //this url should be same as specified in the backend
 export const getAllQuestions= ()=>API.get('/questions/get');
 export const deleteQuestion = (id)=> API.delete(`/questions/delete/${id}`)

@@ -3,7 +3,8 @@ import authReducer from "./auth";
 import currentUserReducer from "./currentUser";
 import questionsReducer from "./questions";
 import usersReducer from "./users";
-import verifyOTP from './verifyOTP'
+import verifyOTPReducer from './verifyOTP'
+import userReducer from "./userReducer";
 export default combineReducers({
-    authReducer,currentUserReducer,questionsReducer,usersReducer,verifyOTP
+    authReducer,currentUserReducer,questionsReducer,usersReducer,verifyOTPReducer,userReducer
 })

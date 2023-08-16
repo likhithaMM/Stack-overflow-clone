@@ -1,11 +1,11 @@
 import React from 'react'
 import './sty.css';
 const Success = () => {
-  //localStorage.removeItem('Profile')
+  localStorage.removeItem('Profile')
   return (
     
     <div className='sucess'>
-      <center><b>Success!!! </b><a href='/'>Home</a></center>
+      <center><b>Success!!! </b><a href='/Auth'>Log In Again..</a>for new plan</center>
     </div>
     
     //<a href='/Auth'>LogIn Again Please</a>

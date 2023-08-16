@@ -112,17 +112,19 @@ export const AskQuestion = async (req, res) => {
       const postQuestion = new Questions(postQuestionData);
       await postQuestion.save();
       await User.findByIdAndUpdate(postQuestionData.userId, { $inc: { noOfQuestions: 1 } });
-      //alert("Question posted successfully!!")
       res.status(200).json("Posted a question successfully");
     } else {
-      //alert("Per day question limit reached")
       res.status(409).json("Per day question limit reached");
     }
+    // res.status(200).json({ status: 200, message: "Posted a question successfully" });
+    // } else {
+    //   // res.status(409).json({ status: 409, message: "Per day question limit reached" });
+    //   // Example: Set error message in response header
+    //   res.status(409).header("X-Error-Message", "Per day question limit reached").send();
+    // }
   } catch (error) {
-    //alert("Error posting question")
-  
     console.log('Error posting question:', error);
-    res.status(409).json("Couldn't post a question");
+    res.status(500).json({ status: 500, message: "An error occurred while posting the question" });
   }
 }
 
