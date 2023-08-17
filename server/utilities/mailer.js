@@ -8,7 +8,7 @@ async function Mailer(otp) {
     secure: Boolean(process.env.SECURE),
     auth: {
       user: process.env.USER,
-      pass: 'xtxylwjnkunmccrg',
+      pass: 'ajasqaqqaovptxzj',
     },
   });
 
